@@ -1,0 +1,256 @@
+:root {
+/* SECCIÓN: COLORES */
+--color-darkest: #151515;
+--color-dark: #202020;
+--color-medium: #303030;
+--color-accent: #00FFCA;
+
+--bg-primary: #101010;
+--bg-secondary: #202020;
+--text-primary: #ffffff;
+--text-secondary: #b0b0b0;
+--border-color: #333333;
+}
+
+/* SECCIÓN: ESTILOS GLOBALES */
+body {
+background-color: #000000;
+margin: 0;
+padding: 0;
+}
+
+.inicio-dashboard {
+padding: 20px;
+max-width: 100%;
+margin: 0 auto;
+background-color: var(--bg-primary);
+color: var(--text-primary);
+min-height: 100vh;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* SECCIÓN: PANEL BASE */
+.panel {
+border-radius: 15px;
+transition: background-color 0.3s, box-shadow 0.3s;
+padding: 25px;
+
+background: linear-gradient(
+135deg,
+var(--color-darkest) 0%,
+var(--color-dark) 60%,
+var(--color-medium) 100%
+);
+box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
+}
+
+.panel h2 {
+color: var(--text-primary); 
+border-bottom: 2px solid var(--border-color);
+padding-bottom: 10px;
+margin-bottom: 15px;
+font-size: 1.6em;
+}
+
+/* SECCIÓN: SUPERIOR (CALENDARIO Y PENDIENTES) */
+.top-section {
+display: grid;
+grid-template-columns: 2fr 1fr;
+gap: 30px;
+margin-bottom: 40px;
+}
+
+/* Panel de Pendientes */
+.pendients-list {
+list-style: none;
+padding: 0;
+margin-top: 15px;
+max-height: 250px; 
+overflow-y: auto;
+}
+
+.pendients-list::-webkit-scrollbar {
+width: 6px;
+}
+.pendients-list::-webkit-scrollbar-thumb {
+background: var(--color-medium);
+border-radius: 3px;
+}
+
+.pendient-item {
+padding: 15px 10px;
+border-bottom: 1px solid var(--border-color);
+font-size: 1.1em;
+color: var(--text-primary);
+transition: background-color 0.2s;
+}
+
+.pendient-item:last-child {
+border-bottom: none;
+}
+
+.pendient-item.no-pendients {
+color: var(--color-accent);
+font-style: italic;
+text-align: center;
+padding: 25px 0;
+}
+
+/* Panel del CALENDARIO */
+.dashboard-calendar-widget { 
+padding: 30px;
+overflow: hidden;
+}
+
+.calendar-header {
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+font-weight: 600;
+color: var(--color-accent); 
+margin-bottom: 15px;
+}
+
+.calendar-grid {
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+text-align: center;
+font-size: 1.1em;
+}
+
+.day {
+width: 30px;
+height: 30px;
+line-height: 30px;
+padding: 0;
+margin: auto;
+display: block;
+border-radius: 50%;
+cursor: default;
+transition: background-color 0.2s, transform 0.2s;
+color: var(--text-primary);
+font-weight: 500;
+}
+
+.day.empty {
+visibility: hidden;
+}
+
+.day.selected {
+background-color: var(--color-accent);
+color: var(--bg-primary) !important;
+font-weight: bold;
+box-shadow: 0 0 12px rgba(0, 255, 202, 0.8);
+transform: scale(1.1);
+}
+
+.day:not(.empty):not(.selected):hover {
+background-color: rgba(255, 255, 255, 0.2);
+transform: scale(1.05);
+}
+
+
+/* SECCIÓN: INFERIOR (PUNTAJES) */
+.bottom-section {
+margin-top: 20px;
+}
+
+.high-scores-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 25px;
+}
+
+.score-card {
+background-color: var(--bg-secondary);
+border: 1px solid var(--border-color);
+border-radius: 15px;
+padding: 25px;
+text-align: center;
+transition: transform 0.3s, background-color 0.3s, border-color 0.3s;
+box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.score-card:hover {
+background-color: var(--color-darkest);
+border-color: var(--color-medium);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+.game-icon {
+font-size: 3em;
+display: block;
+margin-bottom: 10px;
+}
+
+.game-name {
+color: var(--text-primary);
+font-size: 1.1em;
+text-transform: uppercase;
+font-weight: 600;
+margin-bottom: 15px;
+}
+
+.score-value {
+font-weight: 900;
+color: var(--color-accent);
+text-shadow: 0 0 15px rgba(0, 255, 202, 0.9);
+}
+
+/* SECCIÓN: RESPONSIVIDAD (Media Queries) */
+
+/* Pantallas medianas (Tabletas, ~768px a 992px) */
+@media (max-width: 992px) {
+    /* Top Section: Igualamos las columnas */
+    .top-section {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+}
+
+/* Pantallas pequeñas (Móviles/Tabletas pequeñas, ~480px a 768px) */
+@media (max-width: 768px) {
+    .inicio-dashboard {
+        padding: 15px;
+    }
+
+    /* Top Section: Apilamos los paneles */
+    .top-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Score Grid: Reducimos a 2 columnas */
+    .high-scores-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+/* Pantallas extra pequeñas (Móviles, <480px) */
+@media (max-width: 480px) {
+    /* Score Grid: Apilamos las tarjetas */
+    .high-scores-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .panel {
+        padding: 20px 15px;
+    }
+
+    .panel h2 {
+        font-size: 1.4em;
+    }
+
+    .score-card {
+        padding: 20px;
+    }
+
+    .game-icon {
+        font-size: 2.5em;
+    }
+
+        .inicio-dashboard {
+        padding: 15px;
+    }
+}

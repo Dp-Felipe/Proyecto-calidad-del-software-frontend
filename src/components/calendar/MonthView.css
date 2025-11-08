@@ -1,0 +1,253 @@
+.month-calendar-container {
+    padding: 10px;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-radius: 12px;
+}
+
+/* SECCIÓN: NAVEGACIÓN Y CONTROLES */
+.week-navigation-controls {
+    padding: 10px 10px 0 10px; 
+}
+
+.date-display {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 500;
+}
+
+.current-month-year {
+    font-size: 1.8em;
+    color: #a0a0a0; 
+    margin: 0;
+}
+
+.today-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.week-nav-arrows button {
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    font-size: 1.2em;
+    padding: 5px;
+    cursor: pointer;
+    margin: 0 2px;
+    transition: color 0.2s;
+}
+.week-nav-arrows button:hover {
+    color: #ffffff;
+}
+
+/* SECCIÓN: ENCABEZADOS DE DÍA */
+.week-day-headers.month-view-day-headers {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: transparent; 
+    padding: 15px 10px 10px 10px; 
+    gap: 5px; 
+}
+
+.day-header.month-header-card {
+    height: 60px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: default; 
+    margin: 0; 
+    border-radius: 15px; 
+    background-color: #333; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px); 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+
+}
+
+.month-header-card .weekday-name {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #05BFDB;
+    text-transform: uppercase;
+}
+
+.month-header-card .day-number {
+    display: none; 
+}
+
+
+/* SECCIÓN: CUERPO DE LA GRILLA DEL CALENDARIO */
+.month-view {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: #252526; 
+    border: 1px solid #3d3d3d; 
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 10px 10px 10px; 
+}
+
+
+.day-cell {
+    min-height: 120px; 
+    padding: 5px;
+    background-color: transparent; 
+    border: 1px solid #3d3d3d;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.day-cell:hover {
+    background-color: #2a2a2a;
+}
+
+.day-cell.today {
+    background-color: #383838;
+    border: 2px solid #00FFCA; 
+    position: relative;
+    z-index: 1; 
+}
+
+
+.day-number {
+    font-weight: 700;
+    font-size: 1.1em;
+    color: #e0e0e0; 
+    margin-bottom: 5px;
+    padding-left: 5px;
+}
+
+.day-cell.today .day-number {
+    color: #00FFCA; 
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: rgba(0, 255, 202, 0.1); 
+}
+
+.day-cell.other-month {
+    background-color: transparent; 
+}
+.day-cell.other-month .day-number {
+    color: #666;
+}
+
+/* SECCIÓN: EVENTOS DENTRO DEL DÍA */
+.event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 100%; 
+    align-items: flex-start;
+    padding: 0 5px; 
+}
+
+.event-item {
+    padding: 2px 5px;
+    font-size: 0.75em;
+    color: white;
+    border-radius: 4px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.4); 
+    max-width: 100%; 
+    width: 100%;
+    text-align: left;
+}
+
+/* SECCIÓN: RESPONSIVIDAD (Móvil y Tablet) */
+@media (max-width: 768px) {
+    .current-month-year {
+        font-size: 1.5em;
+    }
+    
+    .day-cell {
+        /* Ajuste para tablets/móviles grandes */
+        min-height: 80px; 
+        padding: 3px;
+    }
+    
+    .day-number {
+        font-size: 1em;
+        padding-left: 3px;
+    }
+
+    .event-item {
+        font-size: 0.7em;
+        padding: 1px 3px;
+        gap: 2px;
+    }
+
+    .day-header.month-header-card {
+        height: 40px; 
+    }
+    
+    .month-header-card .weekday-name {
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .date-display {
+        flex-wrap: wrap; 
+        gap: 10px;
+    }
+    
+    .current-month-year {
+        font-size: 1.2em; 
+        order: 1;
+    }
+
+    .week-nav-arrows {
+        order: 3;
+    }
+    
+    .today-button {
+        order: 2;
+        padding: 4px 10px;
+        font-size: 0.8em;
+    }
+
+    .day-cell {
+        /* MÓVIL: MÁXIMA COMPACIDAD */
+        min-height: 45px; /* Reducido a 45px */
+        padding: 1px; 
+    }
+
+    .event-list {
+        gap: 1px;
+    }
+    
+    .day-number {
+        /* Números mucho más pequeños */
+        font-size: 0.9em; /* Reducido a 0.65em */
+        padding-left: 3px;
+    }
+    
+    .event-item {
+        font-size: 0.6em; 
+        padding: 0 2px;
+    }
+    
+    .month-header-card {
+        height: 30px; 
+    }
+    
+    .month-header-card .weekday-name {
+        font-size: 0.7em;
+    }
+}

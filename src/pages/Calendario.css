@@ -1,0 +1,184 @@
+.calendar-page-layout {
+    display: grid;
+    /* Valores base: El calendario ocupa 1fr (100% visible), las tareas 0 (ocultas) */
+    grid-template-columns: 1fr 0fr; 
+    gap: 0; 
+    max-width: 1400px; 
+    margin: 30px auto;
+    padding: 0 20px;
+    transition: grid-template-columns 0.4s ease-in-out, gap 0.4s ease-in-out; 
+    min-height: calc(90vh - 60px); 
+}
+
+.calendar-page-layout.tasks-visible {
+    /* Diseño de dos columnas para escritorio */
+    grid-template-columns: 2fr 1fr; 
+    gap: 30px; 
+}
+
+/* SECCIÓN: ESTILOS DE PANELES */
+.calendar-panel, .tasks-panel {
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); 
+}
+
+.calendar-panel {
+    /* Degradado Verde-Azul */
+    background: linear-gradient(135deg, #05BFDB 0%, #83ffe6 100%); 
+    padding: 0; 
+    position: relative;
+}
+
+.tasks-panel {
+    background-color: #202020; 
+    border: 1px solid #333; 
+    overflow-y: auto; 
+    height: 100%; 
+    padding: 20px;
+}
+
+/* SECCIÓN: SELECTOR DE VISTA */
+.view-selector {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(228, 219, 219, 0.2); 
+    backdrop-filter: blur(8px);
+    border: none; 
+    border-radius: 15px; 
+    padding: 5px;
+    gap: 0;
+    margin-bottom: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 20; 
+}
+
+.view-selector button {
+    background: none;
+    border: none;
+    color: #ffffff; 
+    padding: 8px 15px; 
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.view-selector button.active {
+    background-color: white; 
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    border-color: white;
+}
+
+/* SECCIÓN: PANEL DE TAREAS CABECERA */
+.tasks-panel-close {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444; 
+}
+
+.tasks-panel-close h4 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #ffffff;
+}
+
+.tasks-panel-close button {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: #ccc; 
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.tasks-panel-close button:hover {
+    color: #FF6B6B; 
+}
+
+/* SECCIÓN: NAVEGACIÓN GENÉRICA */
+.calendar-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 15px;
+    font-size: 1.5em; 
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* ---------------------------------------------- */
+/* SECCIÓN: RESPONSIVIDAD (MÓVIL Y TABLET)        */
+/* ---------------------------------------------- */
+
+@media (max-width: 900px) {
+    
+    /* Layout: Apila verticalmente el calendario y las tareas */
+    .calendar-page-layout {
+        display: flex; 
+        flex-direction: column;
+        gap: 20px;
+        margin: 15px auto;
+        padding: 0 10px;
+        min-height: auto; 
+    }
+    
+    /* Si las tareas están visibles, ocupan el 100% del ancho del flex container */
+    .calendar-page-layout.tasks-visible {
+        grid-template-columns: 1fr; /* Sobreescribe el grid para el layout de apilamiento */
+        gap: 20px;
+    }
+
+    /* Ocultar el panel de tareas completamente cuando no está visible */
+    .tasks-panel {
+        display: block; /* Vuelve a ser visible cuando isTaskListVisible es true */
+        width: 100%;
+        order: 2; /* Coloca el panel de tareas debajo del calendario */
+    }
+
+    /* Selector de Vista: Moverlo a posición estática y centrarlo */
+    .view-selector {
+        position: relative;
+        top: auto;
+        right: auto;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px; /* Espacio debajo del selector */
+        background: none;
+        backdrop-filter: none;
+        box-shadow: none;
+        padding: 0;
+    }
+    
+    .view-selector button {
+        padding: 6px 15px;
+        font-size: 0.9em;
+    }
+    
+    /* Navegación: Apilar título y botones */
+    .calendar-navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Ajuste para móviles pequeños */
+@media (max-width: 480px) {
+    .calendar-page-layout {
+        padding: 0 5px;
+    }
+    
+    .tasks-panel {
+        padding: 15px;
+    }
+    
+    .view-selector {
+        width: 100%;
+        justify-content: space-around;
+    }
+}

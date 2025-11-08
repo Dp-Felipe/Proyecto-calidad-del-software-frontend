@@ -1,0 +1,22 @@
+html, body {
+    height: 100%;
+    margin: 0; /* Elimina el margen por defecto del body que causa scroll */
+    padding: 0;
+
+    background-color: #000000; /* Asegura el color de fondo fuera de #root */
+}
+
+/* 2. Aplicar el fondo al contenedor raíz de React (usualmente 'root') */
+#root {
+    height: 100%;
+    width: 100%;
+    /* La regla !important no suele ser necesaria si se respetan los pasos anteriores */
+    background-color: #000000; 
+}
+
+/* 💡 MUY IMPORTANTE: El div principal de tu componente Calendario.jsx */
+/* Si el componente Calendario está envuelto en un div (como se ve en el JSX), 
+   ese div también necesita altura 100% para que el layout calcule correctamente */
+.calendar-component-wrapper {
+    height: 100%;
+}

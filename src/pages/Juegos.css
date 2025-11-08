@@ -1,0 +1,143 @@
+:root {
+    --bg-primary: #101010; 
+    --bg-secondary: #202020; 
+    --color-darkest: #151515; 
+    --text-primary: #ffffff; 
+    --text-secondary: #b0b0b0; 
+    --color-accent: #00FFCA; 
+    --border-color: #333333; 
+}
+
+/* PARTE: CONTENEDOR PRINCIPAL */
+.games-menu-container {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: var(--bg-primary); 
+    color: var(--text-primary); 
+    min-height: calc(100vh - 60px); 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.games-menu-container h1 {
+    color: var(--color-accent); 
+    text-shadow: 0 0 8px rgba(0, 255, 202, 0.4); 
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+.menu-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1em;
+    margin-bottom: 40px;
+}
+
+/* PARTE: GRILLA DE JUEGOS */
+.games-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* PARTE: TARJETA DE JUEGO */
+.game-card {
+    display: flex;
+    align-items: center; 
+    width: 100%;
+    max-width: 350px; 
+    padding: 20px 30px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color); 
+    border-radius: 20px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
+    text-decoration: none;
+    color: var(--text-primary); 
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    cursor: pointer;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    background-color: var(--color-darkest); 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.game-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    font-size: 3.5em;
+    border-radius: 10px;
+}
+
+.game-text-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.game-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--text-primary); 
+    margin: 0;
+}
+
+/* PARTE: RESPONSIVIDAD (Tablet y móvil grande) */
+@media (max-width: 768px) {
+    .games-menu-container h1 {
+        font-size: 2em; 
+    }
+    
+    .games-grid {
+        gap: 20px;
+    }
+    .game-card {
+        /* Se adapta mejor como columna en móvil */
+        flex-direction: column; 
+        text-align: center;
+        max-width: 85%; 
+        padding: 15px 20px;
+    }
+    .game-icon {
+        width: 50px; 
+        height: 50px;
+        margin: 0 0 10px 0; 
+        font-size: 2.5em;
+    }
+    .game-text-content {
+        text-align: center;
+    }
+    .game-title {
+        font-size: 1.1em; 
+    }
+}
+
+/* PARTE: RESPONSIVIDAD (Móvil pequeño) */
+@media (max-width: 480px) {
+    .games-menu-container {
+        padding: 20px 10px; 
+    }
+    .games-menu-container h1 {
+        font-size: 1.5em; 
+        margin-bottom: 20px;
+    }
+    .game-card {
+        max-width: 100%; /* Ocupa todo el ancho disponible */
+        padding: 15px;
+    }
+    .game-icon {
+        width: 40px; 
+        height: 40px;
+        font-size: 2em;
+    }
+    .game-title {
+        font-size: 1em; 
+    }
+}

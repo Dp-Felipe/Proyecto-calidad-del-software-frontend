@@ -1,0 +1,298 @@
+:root {
+    --bg-primary: #101010; 
+    --bg-secondary: #202020; 
+    --color-darkest: #151515;
+    --color-medium: #303030;
+    --text-primary: #ffffff; 
+    --text-secondary: #b0b0b0; 
+    --color-accent: #FFC700;  /* Color de acento neón amarillo/dorado para matemáticas */
+    --border-color: #333333; 
+    
+    /* Colores específicos del juego */
+    --color-correct: #4CAF50; /* Verde Estándar */
+    --color-incorrect: #DC3545; /* Rojo Estándar */
+}
+
+/* --------------------------------------------------------
+   2. CONTENEDOR PRINCIPAL
+   -------------------------------------------------------- */
+
+.math-game-container { /* Renombrado de .english-game-container */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    min-height: calc(100vh - 60px); 
+    
+    /* FONDO OSCURO */
+    background: var(--bg-primary); 
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --------------------------------------------------------
+   3. PANTALLA DE CONFIGURACIÓN (.setup-screen)
+   -------------------------------------------------------- */
+
+.config-box { /* Clase .game-settings renombrada a .config-box */
+    width: 100%;
+    max-width: 600px;
+    padding: 40px;
+    border-radius: 15px;
+    
+    /* Fondo del panel de configuración */
+    background: linear-gradient(135deg, var(--color-darkest), var(--bg-secondary)); 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+.config-box h1 { /* h3 renombrado a h1 en JSX */
+    color: var(--color-accent);
+    text-shadow: 0 0 10px rgba(255, 199, 0, 0.6);
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.config-box label {
+    display: block;
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.difficulty-selector {
+    display: flex; /* Alineado a la estructura de EnglishGame.css */
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+/* Botones base para dificultad y opciones */
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+    font-size: 1em;
+}
+
+/* Botones de dificultad (btn-tertiary) */
+.btn-tertiary {
+    background-color: var(--color-medium);
+    color: var(--text-primary);
+    /* Ajuste visual para MathGame */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+    width: 100%;
+}
+
+.btn-tertiary:hover {
+    background-color: var(--color-darkest);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.btn-active { /* Clase 'active' renombrada a 'btn-active' */
+    background-color: var(--color-accent);
+    color: var(--bg-primary); 
+    box-shadow: 0 0 15px var(--color-accent);
+    transform: translateY(-2px);
+}
+
+.btn-start {
+    padding: 15px 40px;
+    background-color: var(--color-accent);
+    color: var(--bg-primary);
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.btn-start:hover {
+    box-shadow: 0 0 20px var(--color-accent);
+    transform: scale(1.05);
+}
+
+.best-score-display {
+    margin-top: 20px;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+.game-over-message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: var(--color-darkest);
+    color: var(--color-accent);
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+}
+
+/* --------------------------------------------------------
+   4. PANTALLA DE JUEGO ACTIVO (.active-game)
+   -------------------------------------------------------- */
+
+.game-header { /* .game-status-bar renombrado a .game-header */
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    padding: 15px 25px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    font-size: 1.1em;
+}
+
+.timer-box, .score-box {
+    color: var(--text-secondary);
+}
+
+.timer-value, .score-value {
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-left: 5px;
+}
+
+.question-panel {
+    width: 100%;
+    max-width: 800px;
+    padding: 40px;
+    border-radius: 15px;
+    background-color: var(--bg-secondary);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+.difficulty-label {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+
+/* Estilo para la operación a calcular */
+.operation-display {
+    font-size: 3em; 
+    font-weight: 900;
+    margin-bottom: 30px; 
+    color: var(--color-accent); 
+    text-shadow: 0 0 10px var(--color-accent);
+}
+
+/* Contenedor de Formulario de Respuesta */
+.answer-form {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.answer-form input {
+    padding: 15px;
+    font-size: 1.4em;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    width: 50%;
+    max-width: 280px;
+    text-align: center;
+    background-color: var(--color-darkest);
+    color: var(--text-primary);
+    font-weight: 600;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.answer-form input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 10px var(--color-accent);
+    outline: none;
+}
+
+/* Botón de Enviar */
+.btn-submit {
+    /* Hereda las propiedades de .btn */
+    background-color: var(--color-accent);
+    color: var(--bg-primary);
+    font-size: 1.3em;
+    padding: 15px 30px;
+}
+
+.btn-submit:hover {
+    background-color: var(--color-accent);
+    box-shadow: 0 0 15px var(--color-accent);
+}
+
+/* MENSAJES DE FEEDBACK */
+.feedback { /* Alineado con EnglishGame.css (.feedback-message) */
+    font-size: 1.3em;
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.feedback.correct {
+    color: var(--color-correct);
+}
+
+.feedback.incorrect {
+    color: var(--color-incorrect);
+}
+
+/* Botón de Finalizar */
+.reset-button {
+    margin-top: 30px;
+    background-color: var(--color-medium);
+    color: var(--text-secondary);
+}
+
+.reset-button:hover {
+    background-color: var(--color-darkest);
+}
+
+/* ------------------------------------ */
+/* RESPONSIVIDAD                      */
+/* ------------------------------------ */
+@media (max-width: 768px) {
+    .game-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        font-size: 1em;
+    }
+    .question-panel {
+        padding: 25px;
+    }
+    .difficulty-selector {
+        flex-direction: column; 
+        gap: 10px;
+    }
+    .btn-start {
+        max-width: none;
+    }
+    .answer-form {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .answer-form input, .btn-submit {
+        width: 100%;
+        max-width: none;
+        font-size: 1.2em;
+    }
+    .operation-display {
+        font-size: 2.5em; 
+    }
+}
+
+@media (max-width: 480px) {
+    .operation-display {
+        font-size: 2em; 
+    }           
+}

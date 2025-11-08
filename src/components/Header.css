@@ -1,0 +1,164 @@
+html, body, #root {
+    margin: 0;
+    padding: 0;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* SECCIÓN: ESTILOS DEL HEADER */
+.app-header {
+    background-color: #0A4D68;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative; /* Necesario para posicionar el menú móvil */
+}
+
+/* SECCIÓN: TÍTULO */
+.app-header-title {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* SECCIÓN: NAVEGACIÓN (Escritorio - Siempre visible) */
+.app-nav {
+    display: block; /* Visible por defecto en escritorio */
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list-item a {
+    color: white;
+    text-decoration: none;
+    margin: 0 20px;
+    font-weight: bold;
+    transition: color 0.3s;
+    padding: 10px 0; /* padding para el hover */
+    display: block;
+}
+
+.nav-list-item a:hover {
+    color: #05BFDB;
+}
+
+/* ---------------------------------------------- */
+/* SECCIÓN: ESTILOS DEL BOTÓN HAMBURGUESA (MÓVIL) */
+/* ---------------------------------------------- */
+
+.menu-toggle {
+    display: none; /* Oculto en escritorio */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: relative;
+    z-index: 101;
+}
+
+.menu-icon,
+.menu-icon::before,
+.menu-icon::after {
+    display: block;
+    background-color: white;
+    height: 3px;
+    width: 25px;
+    transition: all 0.3s ease-in-out;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+}
+
+.menu-icon::before {
+    top: 10px;
+}
+
+.menu-icon::after {
+    top: 24px;
+}
+
+/* Estado activo (Cruz) */
+.menu-toggle[aria-expanded="true"] .menu-icon {
+    background-color: transparent; /* Oculta la línea del medio */
+}
+
+.menu-toggle[aria-expanded="true"] .menu-icon::before {
+    transform: rotate(45deg);
+    top: 17px;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-icon::after {
+    transform: rotate(-45deg);
+    top: 17px;
+}
+
+
+/* ---------------------------------------------- */
+/* SECCIÓN: RESPONSIVIDAD (Móvil)                 */
+/* ---------------------------------------------- */
+
+@media (max-width: 768px) {
+    .app-header {
+        padding: 10px 20px;
+    }
+
+    /* Mostrar botón hamburguesa */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Ocultar menú de escritorio y convertirlo en superposición vertical */
+    .app-nav {
+        display: none;
+        position: absolute;
+        top: 60px; /* Debajo del header */
+        left: 0;
+        width: 100%;
+        background-color: #0A4D68; /* Mismo color de fondo */
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+        z-index: 100;
+        /* Estilos de animación */
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    
+    /* Mostrar el menú cuando tenga la clase 'open' */
+    .app-nav.open {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-list {
+        flex-direction: column; /* Apila los elementos */
+        padding: 10px 0;
+        width: 100%;
+    }
+
+    .nav-list-item {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-list-item:last-child {
+        border-bottom: none;
+    }
+    
+    .nav-list-item a {
+        margin: 0;
+        padding: 15px 30px;
+    }
+}

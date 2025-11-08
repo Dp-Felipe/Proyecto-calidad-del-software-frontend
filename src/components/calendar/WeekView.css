@@ -1,0 +1,307 @@
+.week-view-container {
+    overflow-x: auto; 
+    padding: 0; 
+    background-color: #1e1e1e; 
+    color: #e0e0e0; 
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); 
+    min-height: 80vh;
+}
+
+/* SECCIÓN: NAVEGACIÓN Y CONTROLES */
+.week-navigation-controls {
+    padding: 10px 20px; 
+}
+
+.date-display {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 500;
+}
+
+.current-month-year {
+    font-size: 1.8em;
+    color: #a0a0a0;
+    margin: 0;
+}
+
+.today-button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.week-nav-arrows button {
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    font-size: 1.2em;
+    padding: 5px;
+    cursor: pointer;
+    margin: 0 2px;
+    transition: color 0.2s;
+}
+.week-nav-arrows button:hover {
+    color: #ffffff;
+}
+
+/* SECCIÓN: FILA DE ENCABEZADOS DE DÍA (Tamaño Base Desktop) */
+.week-day-headers {
+    /* Desktop/Tablet: 80px para hora + 7 columnas flexibles */
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr);
+    background-color: transparent; 
+    padding: 15px 0 10px 0; 
+    z-index: 10;
+    position: relative;
+    /* Asegura un ancho mínimo para el scroll horizontal en mobile */
+    min-width: 600px; 
+}
+
+/* Tarjeta GMT (Hora) */
+.time-header-spacer {
+    height: 70px;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #c7ff4d 0%, #a4e528 100%);
+    border-radius: 15px;
+    margin: 0 5px 0 0px; 
+    font-size: 0.7em;
+    font-weight: 600;
+    color: #333;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+    transform: rotate(270deg); 
+    width: 70px; 
+    height: 70px; 
+    align-self: start; 
+    position: relative;
+    right: -10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Tarjetas de día */
+.day-header {
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin: 0 5px; 
+    border-radius: 15px; 
+    background-color: rgba(173, 216, 230, 0.3); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px); 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+}
+
+.weekday-name {
+    font-size: 0.8em;
+    font-weight: 500;
+    color: #333; 
+    text-transform: capitalize;
+}
+
+.day-number {
+    font-size: 2.2em;
+    font-weight: 800;
+    color: #333;
+    margin-top: 2px;
+}
+
+/* SECCIÓN: CUERPO DE HORAS Y SLOTS (Tamaño Base Desktop) */
+.week-hours-grid {
+    /* Desktop/Tablet: 80px para hora + 7 columnas flexibles */
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr); 
+    border: none;
+    background-color: #1e1e1e; 
+    min-width: 600px;
+}
+
+/* Celda de Hora (Columna 1) */
+.time-label {
+    grid-column: 1;
+    height: 50px; 
+    display: flex;
+    align-items: flex-start; 
+    justify-content: flex-end;
+    padding-right: 10px;
+    padding-top: 5px; 
+    font-size: 0.7em;
+    color: #a0a0a0;
+    border-right: 1px solid #3d3d3d;
+}
+
+/* Slot de Día (Columnas 2-8) */
+.day-slot {
+    height: 50px; /* Altura estándar de slot (50px) */
+    padding: 3px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: visible; 
+    border-bottom: 1px solid #3d3d3d; 
+    border-left: 1px solid #3d3d3d; 
+    cursor: pointer;
+}
+
+/* Eventos */
+.event-item-week {
+    /* ... (sin cambios, ya es pequeño) ... */
+    position: absolute; 
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    height: 98%; 
+    font-size: 0.75em;
+    color: white;
+    border-radius: 8px; 
+    padding: 3px 5px;
+    border: 1px solid transparent; 
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    line-height: 1.4;
+    cursor: pointer;
+    z-index: 5;
+}
+
+@media (max-width: 480px) {
+    
+    .current-month-year {
+        font-size: 1em; /* Más pequeño aún */
+    }
+
+    /* Encabezados y columnas */
+    .week-day-headers {
+        /* Columna de tiempo (40px) y días (mínimo 40px) */
+        grid-template-columns: 40px repeat(7, minmax(40px, 1fr)); /* Columnas más estrechas */
+        min-width: 350px; /* Ancho mínimo para scroll */
+        padding: 5px 0 5px 0;
+    }
+
+    .time-header-spacer {
+        /* Reducir tarjeta GMT: 35px */
+        height: 35px;
+        width: 35px; 
+        right: -3px; 
+        font-size: 0.4em; /* Fuente minúscula */
+    }
+
+    .day-header {
+        /* Reducir tarjetas de día: 35px */
+        height: 35px;
+        border-radius: 6px; /* Bordes más pequeños */
+    }
+
+    .weekday-name {
+        font-size: 0.55em; /* Nombre de día muy pequeño */
+    }
+    .day-number {
+        font-size: 1.2em; /* Número de día más pequeño */
+    }
+    
+    /* Grilla de horas y slots */
+    .week-hours-grid {
+        grid-template-columns: 40px repeat(7, minmax(40px, 1fr)); /* Columnas de 40px */
+        min-width: 350px;
+    }
+
+    .time-label {
+        /* Reducir altura de la etiqueta de tiempo: 25px */
+        height: 25px; 
+        font-size: 0.55em; 
+        padding-right: 2px;
+        padding-top: 1px;
+    }
+
+    .day-slot {
+        /* Reducir altura del slot de día: 25px */
+        height: 25px;
+        padding: 0px; /* Eliminar padding */
+    }
+    
+    .event-item-week {
+        font-size: 0.5em; /* Fuente más pequeña para eventos */
+        padding: 0px 1px; /* Padding mínimo */
+        line-height: 1.3;
+    }
+}
+ 
+
+@media (min-width: 481px) and (max-width: 768px) {
+    
+    .current-month-year {
+        font-size: 1.2em; /* Título un poco más pequeño */
+    }
+
+    .week-navigation-controls {
+        padding: 10px;
+    }
+
+    .week-day-headers {
+        /* Columna de tiempo (50px) y días (mínimo 50px) */
+        grid-template-columns: 50px repeat(7, minmax(50px, 1fr));
+        min-width: 420px; /* Ancho mínimo reducido */
+        padding: 10px 0 5px 0;
+    }
+
+    .time-header-spacer {
+        /* Reducir tarjeta GMT: 40px */
+        height: 40px;
+        width: 40px; 
+        right: -5px; 
+        font-size: 0.55em;
+    }
+
+    .day-header {
+        /* Reducir tarjetas de día: 40px */
+        height: 40px;
+        border-radius: 8px; 
+    }
+
+    .weekday-name {
+        font-size: 0.6em;
+    }
+    .day-number {
+        font-size: 1.5em; /* Número de día más pequeño */
+    }
+    
+    .week-hours-grid {
+        grid-template-columns: 50px repeat(7, minmax(50px, 1fr));
+        min-width: 420px;
+    }
+
+    .time-label {
+        /* Reducir altura de la etiqueta de tiempo: 30px */
+        height: 30px; 
+        font-size: 0.6em; 
+        padding-right: 4px;
+        padding-top: 2px;
+    }
+
+    .day-slot {
+        /* Reducir altura del slot de día: 30px */
+        height: 30px; 
+        padding: 1px;
+    }
+    
+    .event-item-week {
+        font-size: 0.6em; /* Fuente más pequeña para eventos */
+        padding: 1px 2px;
+        border-radius: 3px; 
+    }
+}

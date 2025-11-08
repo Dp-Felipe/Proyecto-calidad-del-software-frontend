@@ -1,0 +1,351 @@
+:root {
+    --bg-primary: #101010; 
+    --bg-secondary: #202020; 
+    --color-darkest: #151515;
+    --color-medium: #303030;
+    --text-primary: #ffffff; 
+    --text-secondary: #b0b0b0; 
+    --color-accent: #00FFCA;  /* Color de acento neón */
+    --border-color: #333333; 
+    
+    /* Colores de Feedback sobre fondo oscuro */
+    --color-correct: #32CD32; /* Verde Lima brillante */
+    --color-incorrect: #FF4500; /* Naranja-Rojo brillante */
+    --color-riddle-text: #FFD700; /* Dorado/Amarillo para el texto del acertijo */
+}
+
+/* --------------------------------------------------------
+   2. CONTENEDOR PRINCIPAL
+   -------------------------------------------------------- */
+
+.riddles-game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    min-height: 100vh;
+    /* FONDO OSCURO */
+    background: var(--bg-primary); 
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --------------------------------------------------------
+   3. PANTALLAS DE CONFIGURACIÓN Y FINAL (.config-box, .game-over-box)
+   -------------------------------------------------------- */
+
+.config-box, .game-over-box {
+    /* Fondo del panel oscuro/gris */
+    background: var(--bg-secondary); 
+    border: 1px solid var(--border-color);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.config-box h1 {
+    /* Título principal con color de acento */
+    color: var(--color-accent);
+    text-shadow: 0 0 10px rgba(0, 255, 202, 0.6);
+    margin-bottom: 30px;
+}
+
+.config-box label {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.points-info {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+
+.difficulty-selector {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+
+/* --------------------------------------------------------
+   4. ESTILOS DE BOTONES BASE (BTN)
+   -------------------------------------------------------- */
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+    font-size: 1em;
+}
+
+.btn-tertiary {
+    /* Botones de dificultad inactivos */
+    background-color: var(--color-medium);
+    color: var(--text-primary);
+}
+
+.btn-tertiary:hover:not(.btn-active) {
+    background-color: var(--color-darkest);
+    opacity: 1;
+}
+
+.btn-active {
+    /* Botón de dificultad ACTIVO */
+    background-color: var(--color-accent);
+    color: var(--bg-primary); 
+    box-shadow: 0 0 15px var(--color-accent);
+}
+
+.btn-start {
+    /* Botón de inicio */
+    background-color: var(--color-accent);
+    color: var(--bg-primary);
+    font-size: 1.2em;
+    padding: 12px 25px;
+    margin-top: 20px;
+}
+
+.btn-start:hover {
+    box-shadow: 0 0 20px var(--color-accent);
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background-color: var(--color-medium);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-darkest);
+}
+
+.best-score-display {
+    color: var(--text-secondary);
+    margin-top: 20px;
+}
+
+.game-over-message {
+    /* Mensaje de finalización */
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: var(--color-darkest);
+    color: var(--color-accent);
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+}
+
+/* --- ESTILOS PANTALLA DE FIN DE JUEGO (END-SCREEN) --- */
+.game-over-box h1 {
+    color: var(--color-accent);
+    text-shadow: 0 0 8px rgba(0, 255, 202, 0.4);
+}
+
+.final-score-text {
+    font-size: 1.8em;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+.final-score-text span {
+    font-weight: 700;
+    color: var(--color-accent);
+    font-size: 1.2em;
+    text-shadow: 0 0 5px rgba(0, 255, 202, 0.6);
+}
+
+.new-record {
+    color: var(--color-correct);
+    font-weight: 700;
+    font-size: 1.3em;
+    margin-top: 10px;
+    text-shadow: 0 0 8px rgba(50, 205, 50, 0.6);
+}
+
+.end-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+
+/* --------------------------------------------------------
+   5. PANTALLA DE JUEGO ACTIVO (ACTIVE-GAME)
+   -------------------------------------------------------- */
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    padding: 15px 25px;
+    /* Fondo oscuro para el header */
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.timer-value, .score-value {
+    font-weight: 700;
+    color: var(--color-accent); /* Neón para tiempo y puntaje */
+}
+
+
+.question-panel {
+    /* Fondo del panel de pregunta oscuro/gris */
+    background: var(--bg-secondary);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+}
+
+.difficulty-label {
+    text-align: center;
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+}
+
+.question-display {
+    font-size: 1.5em;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--border-color); /* Separador sutil */
+    color: var(--text-primary);
+}
+
+/* --- ESTILO ESPECÍFICO DE PREGUNTA (Acertijos) --- */
+.riddle-text {
+    /* Color de texto distinto para los acertijos para darle un toque diferente */
+    color: var(--color-riddle-text); 
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.4);
+    font-style: italic;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.option-button {
+    /* Botones de opción inactivos */
+    background-color: var(--color-medium);
+    color: var(--text-primary);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.option-button:hover:not(:disabled) {
+    background-color: var(--color-darkest);
+    border-color: var(--color-accent);
+}
+
+/* --------------------------------------------------------
+   6. ESTADOS DE RESPUESTA Y FEEDBACK
+   -------------------------------------------------------- */
+
+/* Respuesta seleccionada y es CORRECTA */
+.correct-selected {
+    background-color: var(--color-correct) !important;
+    border-color: var(--color-correct) !important;
+    color: var(--bg-primary) !important; 
+    box-shadow: 0 0 10px var(--color-correct);
+    font-weight: 700;
+}
+/* Respuesta seleccionada y es INCORRECTA */
+.incorrect-selected {
+    background-color: var(--color-incorrect) !important;
+    border-color: var(--color-incorrect) !important;
+    color: var(--bg-primary) !important;
+    box-shadow: 0 0 10px var(--color-incorrect);
+    font-weight: 700;
+}
+/* Muestra la respuesta correcta NO seleccionada */
+.correct-answer {
+    background-color: var(--color-correct) !important;
+    border-color: var(--color-correct) !important;
+    color: var(--bg-primary) !important;
+    font-weight: 700;
+    border: 3px solid var(--color-accent) !important; 
+}
+
+.feedback-message {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+}
+.feedback-message.correct {
+    color: var(--color-correct);
+    background-color: rgba(50, 205, 50, 0.1); 
+}
+.feedback-message.incorrect {
+    color: var(--color-incorrect);
+    background-color: rgba(255, 69, 0, 0.1);
+}
+
+/* --------------------------------------------------------
+   7. BOTÓN FINALIZAR JUEGO
+   -------------------------------------------------------- */
+
+.reset-button {
+    margin-top: 30px;
+    background-color: var(--color-medium);
+    color: var(--text-secondary);
+    align-self: center;
+    padding: 12px 25px;
+}
+
+.reset-button:hover {
+    background-color: var(--color-darkest);
+    color: var(--text-primary);
+}
+
+
+/* ------------------------------------ */
+/* RESPONSIVIDAD              */
+/* ------------------------------------ */
+@media (max-width: 600px) {
+    .game-header, .config-box, .question-panel {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+    .game-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    .difficulty-selector {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
