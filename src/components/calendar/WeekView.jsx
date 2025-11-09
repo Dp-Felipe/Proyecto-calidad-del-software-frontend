@@ -14,7 +14,7 @@ const WeekView = ({ date, scheduledEvents, onDayClick, onPrevWeek, onNextWeek })
 
     const hours = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'));
 
-    // SECCIÓN: LÓGICA DE EVENTOS (Con corrección de seguridad)
+    // SECCIÓN: LÓGICA DE EVENTOS (Filtrado de eventos correctos)
     const getEventsForSlot = (day, hour) => {
         const dayKey = day.toISOString().split('T')[0];
         const events = scheduledEvents[dayKey] || [];
@@ -22,7 +22,7 @@ const WeekView = ({ date, scheduledEvents, onDayClick, onPrevWeek, onNextWeek })
         return events.filter(event => {
             // ⭐ Corrección de seguridad: Validación para evitar 'split' en undefined/null
             if (!event.startTime || !event.endTime || typeof event.startTime !== 'string' || typeof event.endTime !== 'string') {
-                return false; // Ignora eventos con datos de hora incompletos o inválidos
+                return false; 
             }
 
             const startHour = parseInt(event.startTime.split(':')[0]);
@@ -34,7 +34,7 @@ const WeekView = ({ date, scheduledEvents, onDayClick, onPrevWeek, onNextWeek })
                  return false;
             }
             
-            // Lógica para eventos que abarcan varias horas (correcta)
+            // Lógica para eventos que abarcan varias horas
             return startHour === currentHour || (startHour < currentHour && endHour > currentHour);
         });
     };
@@ -71,7 +71,6 @@ const WeekView = ({ date, scheduledEvents, onDayClick, onPrevWeek, onNextWeek })
                 })}
             </div>
 
-
             <div className="week-hours-grid">
                 {hours.map(hour => (
                     <React.Fragment key={hour}>
@@ -91,16 +90,22 @@ const WeekView = ({ date, scheduledEvents, onDayClick, onPrevWeek, onNextWeek })
                                     className={`day-slot ${isToday ? 'today-slot' : ''}`}
                                     onClick={() => onDayClick(day)}
                                 >
-                                    {events.map(event => (
-                                        <div 
-                                            key={event.id} 
-                                            className="event-item-week"
-                                            style={{ backgroundColor: event.color, borderColor: event.color }}
-                                            title={`${event.name} (${formatTime(event.startTime)} - ${formatTime(event.endTime)})`}
-                                        >
-                                            {event.name}
-                                        </div>
-                                    ))}
+                                    {events.map(event => {
+                                        // ⭐ LÓGICA CLAVE: Solo mostrar el nombre si es la hora de inicio del evento
+                                        const isStartHour = parseInt(hour) === parseInt(event.startTime.split(':')[0]);
+                                        
+                                        return (
+                                            <div 
+                                                key={event.id} 
+                                                className="event-item-week"
+                                                style={{ backgroundColor: event.color, borderColor: event.color }}
+                                                title={`${event.name} (${formatTime(event.startTime)} - ${formatTime(event.endTime)})`}
+                                            >
+                                                {/* ⭐ Renderiza el nombre SOLO en la hora de inicio ⭐ */}
+                                                {isStartHour ? event.name : ''} 
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                             );
                         })}
