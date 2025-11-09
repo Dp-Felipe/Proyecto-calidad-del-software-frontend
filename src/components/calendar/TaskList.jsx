@@ -39,7 +39,7 @@ const TaskList = ({ selectedDate, scheduledEvents, setScheduledEvents, uniqueTas
         setSelectedUniqueTaskName(name);
         setNewTaskName(name);
         if (name) {
-            const selectedTask = uniqueTasks.find(t => t.name === name);
+            const selectedTask = (uniqueTasks || []).find(t => t.name === name); // Protección adicional aquí
             if (selectedTask) {
                 setNewTaskColor(selectedTask.color);
             }
@@ -141,9 +141,9 @@ const TaskList = ({ selectedDate, scheduledEvents, setScheduledEvents, uniqueTas
                 const savedUniqueTask = await createOrGetUniqueTask(taskData);
                 
                 // Actualizar catálogo si es nuevo
-                const isNew = !uniqueTasks.find(t => t.name.toLowerCase() === savedUniqueTask.name.toLowerCase());
+                const isNew = !(uniqueTasks || []).find(t => t.name.toLowerCase() === savedUniqueTask.name.toLowerCase()); // Protección
                 if (isNew) {
-                    setUniqueTasks(prevTasks => [...prevTasks, savedUniqueTask]);
+                    setUniqueTasks(prevTasks => [...(prevTasks || []), savedUniqueTask]); // Protección
                 }
                 
                 const eventDataToCreate = {
@@ -267,7 +267,8 @@ const TaskList = ({ selectedDate, scheduledEvents, setScheduledEvents, uniqueTas
                                     className="task-catalog-select"
                                 >
                                     <option value="">-- Crear Nueva Tarea --</option>
-                                    {uniqueTasks.map(task => (
+                                    {/* ⭐ CORRECCIÓN CLAVE: Protección contra 'uniqueTasks' no siendo un array */}
+                                    {(uniqueTasks || []).map(task => ( 
                                         <option 
                                             key={task.id} 
                                             value={task.name}
