@@ -5,7 +5,7 @@ import axios from 'axios';
 // 1. Usamos 'import.meta.env.VITE_API_URL' para obtener la URL de Render (si usas Vite).
 // 2. Usamos 'http://localhost:3000/api' como fallback para desarrollo.
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api'; 
-const API_URL = `${API_BASE_URL}/auth`; // Ruta completa para autenticación
+const API_URL = `${API_BASE_URL}/auth`;
 
 const AuthContext = createContext();
 
