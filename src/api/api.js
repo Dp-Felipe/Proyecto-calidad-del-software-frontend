@@ -21,7 +21,7 @@ const handleRequest = async (endpoint, options = {}) => {
     
     // NOTA: Tu AuthContext usa sessionStorage, pero aquí usas localStorage. 
     // Asegúrate de que el token realmente se guarde en localStorage para que esta línea funcione.
-    const token = localStorage.getItem('token'); 
+    const token = sessionStorage.getItem('token'); 
 
     const headers = {
         'Content-Type': 'application/json',
